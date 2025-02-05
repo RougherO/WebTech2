@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE question-paper SYSTEM "q10.dtd">
+
+<question-paper>
+    <question no="1">
+        <text>What is the capital of France?</text>
+        <optionA>Berlin</optionA>
+        <optionB>Madrid</optionB>
+        <optionC>Paris</optionC>
+        <optionD>Rome</optionD>
+        <answer value="optionC">Paris</answer>
+    </question>
+    
+    <question no="2">
+        <text>Which language is primarily used for Android development?</text>
+        <optionA>Java</optionA>
+        <optionB>Python</optionB>
+        <optionC>C++</optionC>
+        <optionD>Swift</optionD>
+        <answer value="optionA">Java</answer>
+    </question>
+    
+    <question no="3">
+        <text>What is the boiling point of water at sea level?</text>
+        <optionA>90°C</optionA>
+        <optionB>100°C</optionB>
+        <optionC>110°C</optionC>
+        <optionD>120°C</optionD>
+        <answer value="optionB">100°C</answer>
+    </question>
+</question-paper>
+
+<!-- xmllint __noout __dtdvalid q10.dtd q10.xml -->

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 0;
+        }
+
+        .chat-container {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            background-color: white;
+        }
+
+        .header {
+            background: #0078D7;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+            word-wrap: break-word;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message .content {
+            margin-bottom: 5px;
+        }
+
+        .message .timestamp {
+            font-size: 12px;
+            color: #c4b0b0;
+            align-self: flex-end;
+        }
+
+        .message.sender {
+            align-self: flex-end;
+            background: #0078D7;
+            color: white;
+        }
+
+        .message.receiver {
+            align-self: flex-start;
+            background: #e1e1e1;
+        }
+
+        .input-container {
+            padding: 15px;
+            background: #fff;
+            border-top: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #0078D7;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button:disabled {
+            background: #a0a0a0;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .username-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header">WebSocket Chat</div>
+        <div class="messages" id="messages"></div>
+        <div class="input-container">
+            <input type="text" id="message" placeholder="Type a message">
+            <button id="sendButton">Send</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div class="username-box">
+            <h3>Enter your username</h3>
+            <input type="text" id="username" placeholder="Username" oninput="checkUsername()">
+            <button id="joinButton">Join Chat</button>
+        </div>
+    </div>
+
+    <script>
+        var socket;
+        var username = "";
+
+        // Enable join button if input is not empty
+        function checkUsername() {
+            var joinButton = document.getElementById('joinButton');
+            var usernameInput = document.getElementById('username').value.trim();
+            joinButton.disabled = usernameInput === "";
+        }
+
+        function createMessageDiv(message, isSender) {
+            var messagesDiv = document.getElementById("messages");
+            var data = message;
+            var timestamp = new Date().toLocaleTimeString();
+            var messageDiv = document.createElement("div");
+            messageDiv.classList.add("message");
+
+            if (isSender) {
+                messageDiv.classList.add("sender");
+            } else {
+                messageDiv.classList.add("receiver");
+            }
+
+            var messageContent = document.createElement("div");
+            messageContent.classList.add("content");
+            messageContent.textContent = data;
+
+            var messageTimestamp = document.createElement("div");
+            messageTimestamp.classList.add("timestamp");
+            messageTimestamp.textContent = timestamp;
+
+            messageDiv.appendChild(messageContent);
+            messageDiv.appendChild(messageTimestamp);
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll
+        }
+
+        function connect() {
+            var usernameInput = document.getElementById("username").value.trim();
+            if (usernameInput === "") return;
+            username = usernameInput;
+
+            socket = new WebSocket("ws://192.168.29.160:8080/websocket-chat/chat?username=" + encodeURIComponent(username));
+
+            socket.onopen = function() {
+                document.getElementById("overlay").style.display = "none";
+                document.getElementById("message").disabled = false;
+                document.getElementById("sendButton").disabled = false;
+            };
+
+            socket.onmessage = function(event) {
+                createMessageDiv(event.data, false)                
+            };
+        }
+
+        function sendMessage() {
+            var input = document.getElementById("message");
+            var message = input.value.trim()
+            if (socket &&  message !== "") {
+                createMessageDiv(message, true);
+                socket.send(message);
+                input.value = "";
+            }
+        }
+
+        document.getElementById("joinButton").addEventListener("click", connect)
+        document.getElementById("sendButton").addEventListener("click", sendMessage)
+    </script>
+</body>
+</html>
