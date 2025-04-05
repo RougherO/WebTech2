@@ -1,0 +1,65 @@
+<html>
+    <head>
+    <title>Open Account</title>
+    <script>
+        function checkUsername(event) {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value;
+            if (!username) return;
+
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    const form = document.getElementById("Form");
+                    form.style.display = "none";
+
+                    const statusMsg = document.getElementById("status");
+                    const submitBtn = document.getElementById("submit");
+
+                    if (xhr.status === 200) {
+                        statusMsg.innerText = "New Login Created";
+                        statusMsg.style.color = "green";
+                        return true;
+                    }
+                    
+                    if (xhr.status === 409) {
+                        statusMsg.innerText = "Username Taken";
+                        statusMsg.style.color = "red";
+                    } else {
+                        statusMsg.innerText = xhr.responseText;
+                        statusMsg.style.color = "gray";
+                    }
+
+                    return false;
+                }
+            };
+
+            xhr.open("GET", "check_user.jsp?username=" + encodeURIComponent(username));
+            xhr.send();
+        }
+
+        window.onload = function() {
+            document.getElementById("Form").addEventListener("submit", checkUsername);
+        }
+  </script>
+</head>
+    <body>
+        <form action="login.jsp" id="Form" method="post">
+            <table>
+                <tr>
+                    <td>Username:</td>
+                    <td><input type="text" name="username" id="username"></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="login" id="submit"></td>
+                </tr>
+            </table>
+        </form>
+        <span id="status"></span>
+    </body>
+</html>

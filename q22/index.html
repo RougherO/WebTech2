@@ -1,0 +1,53 @@
+<html>
+    <head>
+    <title>Open Account</title>
+    <script>
+        function checkUsername(event) {
+            const username = document.getElementById("username").value;
+            if (!username) return;
+
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    const statusMsg = document.getElementById("status");
+                    const submitBtn = document.getElementById("submit");
+
+                    if (xhr.status === 200) {
+                        statusMsg.innerText = "Available";
+                        statusMsg.style.color = "green";
+                        submitBtn.disabled = false;
+                    } else if (xhr.status === 409) {
+                        statusMsg.innerText = "Taken";
+                        statusMsg.style.color = "red";
+                        submitBtn.disabled = true;
+                    } else {
+                        statusMsg.innerText = xhr.responseText;
+                        statusMsg.style.color = "gray";
+                        submitBtn.disabled = true;
+                    }
+                }
+            };
+            xhr.open("GET", "check_user.jsp?username=" + encodeURIComponent(username), true);
+            xhr.send();
+        }
+  </script>
+</head>
+    <body>
+        <form action="login.jsp" method="post">
+            <table>
+                <tr>
+                    <td>Username:</td>
+                    <td><input type="text" name="username" id="username" onkeyup="checkUsername()"></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="password"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="login" id="submit" disabled></td>
+                </tr>
+            </table>
+        </form>
+        <span id="status"></span>
+    </body>
+</html>
