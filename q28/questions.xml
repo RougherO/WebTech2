@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="questions.xsl"?>
+
+<questions>
+    <question>
+        <text>What is the capital of France?</text>
+        <option>A. Berlin</option>
+        <option>B. London</option>
+        <option>C. Paris</option>
+        <option>D. Madrid</option>
+        <answer>C</answer>
+    </question>
+    <question>
+        <text>What is 2 + 2?</text>
+        <option>A. 3</option>
+        <option>B. 4</option>
+        <option>C. 5</option>
+        <option>D. 6</option>
+        <answer>B</answer>
+    </question>
+</questions>
