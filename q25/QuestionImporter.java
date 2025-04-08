@@ -13,13 +13,14 @@ public class QuestionImporter {
     }
 
     public void insert() throws Exception {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "roughero", "")) {
+        String sql =
+                "INSERT INTO questions (question_text, opt_a, opt_b, opt_c, opt_d, answer) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn =
+                DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "roughero", "");
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = builder.parse(xmlFile);
             NodeList questions = document.getElementsByTagName("question");
-
-            String sql = "INSERT INTO questions (question_text, opt_a, opt_b, opt_c, opt_d, answer) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
 
             for (int i = 0; i < questions.getLength(); i++) {
                 Element question = (Element) questions.item(i);

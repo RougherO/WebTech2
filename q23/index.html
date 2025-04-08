@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>State and District Info</title>
+	<script>
+	function fetchStates() {
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				document.getElementById("state").innerHTML = xhr.responseText;
+			}
+		};
+		xhr.open("GET", "states", true);
+		xhr.send();
+	}
+
+	function fetchDistricts(stateId) {
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				document.getElementById("district").innerHTML = xhr.responseText;
+			}
+		};
+		xhr.open("GET", "districts?stateId=" + encodeURIComponent(stateId), true);
+		xhr.send();
+	}
+
+	function fetchInfo(districtId) {
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				document.getElementById("info").innerHTML = xhr.responseText;
+			}
+		};
+		xhr.open("GET", "info?districtId=" + encodeURIComponent(districtId), true);
+		xhr.send();
+	}
+
+	window.onload = fetchStates;
+	</script>
+</head>
+<body>
+<h2>Select State and District</h2>
+
+<form>
+	<label>State:</label>
+	<select id="state" onchange="fetchDistricts(this.value)">
+	<option value="">--Select State--</option>
+	</select>
+
+	<br><br>
+
+	<label>District:</label>
+	<select id="district" onchange="fetchInfo(this.value)">
+	<option value="">--Select District--</option>
+	</select>
+</form>
+
+<br><br>
+
+<div id="info"></div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <%
     String username = request.getParameter("username");
     
-    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "user", "")) {
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "roughero", "")) {
         PreparedStatement stmt = conn.prepareStatement("SELECT 1 FROM users WHERE username = ?");
         stmt.setString(1, username);
         
