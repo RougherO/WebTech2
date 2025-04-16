@@ -13,7 +13,7 @@
 
         String sql = "SELECT id, answer FROM questions";
         try (
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "roughero", "");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test", "be2295", "gLbLyRtG");
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet res = stmt.executeQuery();
         ) {

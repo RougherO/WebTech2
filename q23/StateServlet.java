@@ -11,8 +11,8 @@ public class StateServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        try (Connection conn =
-                DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "roughero", "");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test",
+                "be2295", "gLbLyRtG");
                 Statement stmt = conn.createStatement();
                 ResultSet res = stmt.executeQuery("SELECT id, name FROM states")) {
 

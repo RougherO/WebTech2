@@ -15,9 +15,8 @@ public class QuestionImporter {
     public void insert() throws Exception {
         String sql =
                 "INSERT INTO questions (question_text, opt_a, opt_b, opt_c, opt_d, answer) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn =
-                DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "roughero", "");
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test",
+                "be2295", "gLbLyRtG"); PreparedStatement stmt = conn.prepareStatement(sql)) {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = builder.parse(xmlFile);
             NodeList questions = document.getElementsByTagName("question");

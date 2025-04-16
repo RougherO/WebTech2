@@ -11,9 +11,8 @@ public class InfoServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String sql = "SELECT info FROM districts WHERE id = ?";
-        try (Connection conn =
-                DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "roughero", "");
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test",
+                "be2295", "gLbLyRtG"); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, Integer.parseInt(districtId));
 

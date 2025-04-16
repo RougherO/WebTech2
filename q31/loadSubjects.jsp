@@ -5,7 +5,7 @@
     String sql = "SELECT DISTINCT subject FROM student_marks WHERE semester=?";
 
     try (
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "roughero", "");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test", "be2295", "gLbLyRtG");
         PreparedStatement stmt = conn.prepareStatement(sql);
     ){
         stmt.setInt(1, Integer.parseInt(semester));

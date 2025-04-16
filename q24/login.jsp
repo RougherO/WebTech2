@@ -4,7 +4,7 @@
     String pass = request.getParameter("password");
     String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
     try (
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "roughero", "");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test", "be2295", "gLbLyRtG");
         PreparedStatement stmt = conn.prepareStatement(sql);
     ) {
         

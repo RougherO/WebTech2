@@ -15,8 +15,8 @@ public class ChangePasswordServlet extends HttpServlet {
         String newPass = request.getParameter("newPass");
 
         String sql = "SELECT * FROM users WHERE username=? AND password=?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "roughero", "");
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test",
+                "be2295", "gLbLyRtG"); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, username);
             stmt.setString(2, oldPass);
             ResultSet rs = stmt.executeQuery();
