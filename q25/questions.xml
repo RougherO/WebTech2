@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questions>
+    <question>
+        <text>When is the Independence Day for India celebrated?</text>
+        <option>A. 26th January</option>
+        <option>B. 15th August</option>
+        <option>C. 25th December</option>
+        <option>D. 14th November</option>
+        <answer>B</answer>
+    </question>
+    <question>
+        <text>Which is the largest planet in the Solar System?</text>
+        <option>A. Earth</option>
+        <option>B. Mars</option>
+        <option>C. Jupiter</option>
+        <option>D. Venus</option>
+        <answer>C</answer>
+    </question>
+    <question>
+        <text>What is the national animal of India?</text>
+        <option>A. Tiger</option>
+        <option>B. Donkey</option>
+        <option>C. Snake</option>
+        <option>D. Cow</option>
+        <answer>A</answer>
+    </question>
+</questions>

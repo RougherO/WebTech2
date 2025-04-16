@@ -11,7 +11,7 @@
         int total = 0;
         int correct = 0;
 
-        String sql = "SELECT id, answer FROM questions";
+        String sql = "SELECT id, answer FROM questions_95";
         try (
             Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test", "be2295", "gLbLyRtG");
             PreparedStatement stmt = conn.prepareStatement(sql);

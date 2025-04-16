@@ -9,7 +9,7 @@
     <h2>Multiple Choice Quiz</h2>
     <form method="post" action="result.jsp">
         <%
-            String sql = "SELECT * FROM questions";
+            String sql = "SELECT * FROM questions_95";
             try (
                 Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test", "be2295", "gLbLyRtG");
                 PreparedStatement stmt = conn.prepareStatement(sql);

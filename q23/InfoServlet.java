@@ -10,7 +10,7 @@ public class InfoServlet extends HttpServlet {
         String districtId = request.getParameter("districtId");
         PrintWriter out = response.getWriter();
 
-        String sql = "SELECT info FROM districts WHERE id = ?";
+        String sql = "SELECT info FROM districts_95 WHERE id = ?";
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test",
                 "be2295", "gLbLyRtG"); PreparedStatement stmt = conn.prepareStatement(sql)) {
 

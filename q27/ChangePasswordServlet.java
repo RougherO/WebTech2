@@ -14,7 +14,7 @@ public class ChangePasswordServlet extends HttpServlet {
         String oldPass = request.getParameter("oldPass");
         String newPass = request.getParameter("newPass");
 
-        String sql = "SELECT * FROM users WHERE username=? AND password=?";
+        String sql = "SELECT * FROM users_95 WHERE username=? AND password=?";
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test",
                 "be2295", "gLbLyRtG"); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, username);
@@ -22,7 +22,7 @@ public class ChangePasswordServlet extends HttpServlet {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                String updateSQL = "UPDATE users SET password=? WHERE username=?";
+                String updateSQL = "UPDATE users_95 SET password=? WHERE username=?";
                 PreparedStatement updateStmt = conn.prepareStatement(updateSQL);
                 updateStmt.setString(1, newPass);
                 updateStmt.setString(2, username);

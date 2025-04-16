@@ -14,7 +14,7 @@ public class StateServlet extends HttpServlet {
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test",
                 "be2295", "gLbLyRtG");
                 Statement stmt = conn.createStatement();
-                ResultSet res = stmt.executeQuery("SELECT id, name FROM states")) {
+                ResultSet res = stmt.executeQuery("SELECT id, name FROM states_95")) {
 
             out.println("<option value=''>--Select State--</option>");
             while (res.next()) {

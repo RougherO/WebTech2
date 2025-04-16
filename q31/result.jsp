@@ -4,7 +4,7 @@
     String subject = request.getParameter("subject");
     String semester = request.getParameter("semester");
 
-    String sql = "SELECT marks FROM student_marks WHERE roll_number=? AND semester=? AND subject=?";
+    String sql = "SELECT marks FROM student_marks_95 WHERE roll_number=? AND semester=? AND subject=?";
     try (
         Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test", "be2295", "gLbLyRtG");
         PreparedStatement stmt = conn.prepareStatement(sql);

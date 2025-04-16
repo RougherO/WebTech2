@@ -1,7 +1,7 @@
 <%@ page import="java.sql.*" %>
 <%
     String username = request.getParameter("username");
-    String sql = "SELECT 1 FROM users WHERE username = ?";
+    String sql = "SELECT 1 FROM users_95 WHERE username = ?";
     try (
         Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test", "be2295", "gLbLyRtG");
         PreparedStatement stmt = conn.prepareStatement(sql);

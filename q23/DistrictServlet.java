@@ -9,7 +9,7 @@ public class DistrictServlet extends HttpServlet {
             throws IOException {
         String stateId = request.getParameter("stateId");
         PrintWriter out = response.getWriter();
-        String sql = "SELECT id, name FROM districts WHERE state_id = ?";
+        String sql = "SELECT id, name FROM districts_95 WHERE state_id = ?";
 
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://172.16.4.234:3306/test",
                 "be2295", "gLbLyRtG"); PreparedStatement stmt = conn.prepareStatement(sql)) {
