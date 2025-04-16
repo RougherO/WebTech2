@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Change Password</title>
+    <script>
+        function changePassword(event) {
+            event.preventDefault();
+
+            var username = document.getElementById("username").value;
+            var oldPass = document.getElementById("oldPass").value;
+            var newPass = document.getElementById("newPass").value;
+            var confirmPass = document.getElementById("confirmPass").value;
+
+            if (newPass !== confirmPass) {
+                document.getElementById("result").innerHTML = "New passwords do not match.";
+                return;
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById("result").innerHTML = xhr.responseText;
+                }
+            };
+
+            xhr.open("POST", "changePass", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send(
+                "username=" + encodeURIComponent(username) +
+                "&oldPass=" + encodeURIComponent(oldPass) +
+                "&newPass=" + encodeURIComponent(newPass)
+            );
+        }
+
+        window.onload = function() {
+            document.getElementById("passForm").addEventListener("submit", changePassword);
+        }
+    </script>
+</head>
+<body>
+    <h2>Change Your Password</h2>
+    <form id="passForm">
+        <label>Username:</label><br>
+        <input type="text" id="username" required><br><br>
+
+        <label>Old Password:</label><br>
+        <input type="password" id="oldPass" required><br><br>
+
+        <label>New Password:</label><br>
+        <input type="password" id="newPass" required><br><br>
+
+        <label>Confirm New Password:</label><br>
+        <input type="password" id="confirmPass" required><br><br>
+
+        <button type="submit">Change Password</button>
+    </form>
+    <p id="result"></p>
+</body>
+</html>
